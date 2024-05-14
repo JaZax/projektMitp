@@ -38,12 +38,14 @@ class card:
         accessory = Image.open(self.accessory)
 
         # nakładanie na siebie kolejnych warstw z parametrami
+        # alpha_composite(warstwaNiżej, warstwaWyżej)
 
         bgLayer = Image.alpha_composite(frontBg, template)
         bandLayer = Image.alpha_composite(bgLayer, frontBand)
         hatLayer = Image.alpha_composite(bandLayer, hat)
         bodyLayer = Image.alpha_composite(hatLayer, body)
         accessoryLayer = Image.alpha_composite(bodyLayer, accessory)
+
 
         accessoryLayer.show()
         

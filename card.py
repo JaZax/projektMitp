@@ -50,6 +50,11 @@ class card:
         self.backImg = backImg
         self.hue = hue
 
+        for stat in self.stats:
+            index = self.stats.index(stat)
+            
+            self.stats[index] = str(stat)
+
     def printCardData(self):
         print(f'''
                 Nazwa = {self.name}

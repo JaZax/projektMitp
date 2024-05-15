@@ -1,34 +1,20 @@
 from card import card 
-from PIL import Image
+from gui import *
+from images import *
 
-template = Image.open(fr"img\template1.png")
-frontBg1 = Image.open(fr"img\frontBg1.png")
-frontBg2 = Image.open(fr"img\frontBg2.png")
-frontBand = Image.open(fr"img\frontBand1.png")
+import tkinter as tk
 
-backImg = Image.open(fr"img\backImg1.png")
+if __name__ == "__main__":
+    testCard = card("pimpek", "fajny ten pimpek", [35, 20, 100], hatMag, bodyMag, accessoryMag, template, frontBg1, frontBand, backImg, 0)
 
-hatMag = Image.open(fr"img\hatMag.png")
-bodyMag = Image.open(fr"img\bodyMag.png")
-accessoryMag = Image.open(fr"img\accessoryMag.png")
+    # testCard.renderCard()
 
-hatKnight = Image.open(fr"img\hatKnight.png")
-bodyKnight = Image.open(fr"img\bodyKnight.png")
-accessoryKnight = Image.open(fr"img\accessoryKnight.png")
 
-hatRomantic = Image.open(fr"img\hatRomantic.png")
-bodyRomantic = Image.open(fr"img\bodyRomantic.png")
-accessoryRomantic = Image.open(fr"img\accessoryRomantic.png")
+# testCard2 = card("hihi", "fajny ten pimpek fajny ten pimpek fajny ten pimpek fajny ten pimpek fajny ten pimpek fajny ten pimpek", ["100", "100", "100"], hatKnight, bodyKnight, accessoryKnight, template, frontBg2, frontBand, backImg, 100)
 
-testCard = card("pimpek", "fajny ten pimpek", ["35", "20", "100"], hatMag, bodyMag, accessoryMag, template, frontBg1, frontBand, backImg, 0)
+# testCard2.renderCard()
 
-testCard.renderCard()
+# testCard3 = card("ehfaiuwhfieahufahw", "Testowy opis karty. To jest testowy opis karty, nic ciekawego, karta jaka jest każdy widzi", ["2", "2", "2"], hatRomantic, bodyRomantic, accessoryRomantic, template, frontBg1, frontBand, backImg, 180)
 
-testCard2 = card("hihi", "fajny ten pimpek fajny ten pimpek fajny ten pimpek fajny ten pimpek fajny ten pimpek fajny ten pimpek", ["100", "100", "100"], hatKnight, bodyKnight, accessoryKnight, template, frontBg2, frontBand, backImg, 100)
-
-testCard2.renderCard()
-
-testCard3 = card("ehfaiuwhfieahufahw", "Testowy opis karty. To jest testowy opis karty, nic ciekawego, karta jaka jest każdy widzi", ["2", "2", "2"], hatRomantic, bodyRomantic, accessoryRomantic, template, frontBg1, frontBand, backImg, 180)
-
-testCard3.renderCard()
+# testCard3.renderCard()
 

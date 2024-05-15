@@ -78,7 +78,7 @@ class card:
         # alpha_composite(warstwaNiżej, warstwaWyżej)
 
         bgLayer = Image.alpha_composite(self.frontBg, self.template)
-        bandLayer = Image.alpha_composite(bgLayer, self.frontBand)
+        bandLayer = Image.alpha_composite(bgLayer, colorize(self.frontBand, self.hue))
         hatLayer = Image.alpha_composite(bandLayer, self.hat)
         bodyLayer = Image.alpha_composite(hatLayer, self.body)
         accessoryLayer = Image.alpha_composite(bodyLayer, self.accessory)
@@ -114,5 +114,7 @@ class card:
         dst.paste(accessoryLayer, (0, 0))
         dst.paste(colorize(self.backImg, self.hue), (imageWidth, 0))
 
-        dst.show()
+        # dst.show()
+
+        return dst
         

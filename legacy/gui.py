@@ -22,7 +22,7 @@ class CardGeneratorApp:
 
         self.create_widgets()
 
-    def create_widgets(self):
+    def create_widgets():
         frame = ttk.Frame(self.root, padding="20")
         frame.grid(column=0, row=0, sticky=(tk.W, tk.E, tk.N, tk.S))
 

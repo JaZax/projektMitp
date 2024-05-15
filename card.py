@@ -1,15 +1,43 @@
 from PIL import Image, ImageDraw, ImageFont
 import textwrap
+import numpy as np
+import colorsys
 
 font90 = ImageFont.truetype(fr'.\fonts\Roboto_Mono\static\RobotoMono-Bold.ttf', 90)
 font70 = ImageFont.truetype(fr'.\fonts\Roboto_Mono\static\RobotoMono-Bold.ttf', 70)
 font60 = ImageFont.truetype(fr'.\fonts\Roboto_Mono\static\RobotoMono-Bold.ttf', 60)
 font40 = ImageFont.truetype(fr'.\fonts\Roboto_Mono\static\RobotoMono-Medium.ttf', 40)
 
+def renderText(text, font, color, x, y, d):
+    _, _, w, h = d.textbbox((50 , 50), text, font=font)
+    d.text((x , y), text, font=font, fill=color, align='center', anchor="mm")
+
+rgb_to_hsv = np.vectorize(colorsys.rgb_to_hsv)
+hsv_to_rgb = np.vectorize(colorsys.hsv_to_rgb)
+
+def shift_hue(arr, hout):
+    r, g, b, a = np.rollaxis(arr, axis=-1)
+    h, s, v = rgb_to_hsv(r, g, b)
+    h = hout
+    r, g, b = hsv_to_rgb(h, s, v)
+    arr = np.dstack((r, g, b, a))
+    return arr
+
+def colorize(image, hue):
+    """
+    Colorize PIL image `original` with the given
+    `hue` (hue within 0-360); returns another PIL image.
+    """
+    img = image.convert('RGBA')
+    arr = np.array(np.asarray(img).astype('float'))
+    new_img = Image.fromarray(shift_hue(arr, hue/360.).astype('uint8'), 'RGBA')
+
+    return new_img
+
 # klasa tworząca karte z podanych parametrów
 
 class card:
-    def __init__(self, name: str, desc: str, stats: list, hat, body, accessory, template, frontBg, frontBand, backImg):
+    def __init__(self, name: str, desc: str, stats: list, hat, body, accessory, template, frontBg, frontBand, backImg, hue: int):
         self.name = name
         self.desc = desc
         self.stats = stats # (mana, stamina, health)
@@ -20,6 +48,7 @@ class card:
         self.frontBg = frontBg
         self.frontBand = frontBand
         self.backImg = backImg
+        self.hue = hue
 
     def printCardData(self):
         print(f'''
@@ -70,14 +99,15 @@ class card:
 
         # nanoszenie statystyk
 
-        _, _, wMana, hMana = d.textbbox((50 , 50), self.stats[0], font=font90)
-        d.text((105 , 95), self.stats[0], font=font90, fill='black', align='center', anchor="mm")
+        renderText(self.stats[0], font90, 'black', 105, 95, d)
+        renderText(self.stats[1], font70, 'black', 80, imageHeight - 85, d)
+        renderText(self.stats[2], font70, 'black', imageWidth - 80, imageHeight - 85, d)
 
-        _, _, wStamina, hStamina = d.textbbox((50 , 50), self.stats[1], font=font70)
-        d.text((80 , imageHeight - 85), self.stats[1], font=font70, fill='black', align='center', anchor="mm")
+        # rewers obok, colorize: zmiana koloru rewersu
 
-        _, _, wHealth, hHealth = d.textbbox((50 , 50), self.stats[1], font=font70)
-        d.text((imageWidth - 80 , imageHeight - 85), self.stats[1], font=font70, fill='black', align='center', anchor="mm")
+        dst = Image.new('RGBA', (2 * imageWidth, imageHeight))
+        dst.paste(accessoryLayer, (0, 0))
+        dst.paste(colorize(self.backImg, self.hue), (imageWidth, 0))
 
-        accessoryLayer.show()
+        dst.show()
         

@@ -7,16 +7,30 @@ from PIL.ImageQt import ImageQt
 
 from card import card
 from images import *
+import pickle
 
-testCard = card("agnieszka", "fajny ten pimpek", [0, 0, 100], hatMag, bodyKnight, accessoryRomantic, template, frontBg2, frontBand, backImg, 330)
+testCard = card("ehfaiuwhfieahufahw", "karta jaka jest każdy widzi", ["2", "2", "2"], hatRomantic, bodyRomantic, accessoryRomantic, template, frontBg1, frontBand, backImg, 180)
 
 testCardImage = testCard.renderCard()
+
+# save card file
+#
+# testCard.saveCardEdit()
+
+
+# read card file
+#
+# with open('agnieszka.card', 'rb') as handle:
+#     b = pickle.load(handle)
+# 
+#     print(b)
+
 image = ImageQt(testCardImage)
 print(image)
 
 class mainWindow(QMainWindow):
     def __init__(self):
-        super(mainWindow, self).__init__()
+        super().__init__()
         self.setWindowTitle("Generator kart kapibar")
         self.setGeometry(0, 0, 1000, 500)
 

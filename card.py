@@ -2,6 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 import textwrap
 import numpy as np
 import colorsys
+import pickle
 
 font90 = ImageFont.truetype(fr'.\fonts\Roboto_Mono\static\RobotoMono-Bold.ttf', 90)
 font70 = ImageFont.truetype(fr'.\fonts\Roboto_Mono\static\RobotoMono-Bold.ttf', 70)
@@ -34,6 +35,7 @@ def colorize(image, hue):
 
     return new_img
 
+
 # klasa tworząca karte z podanych parametrów
 
 class card:
@@ -49,6 +51,8 @@ class card:
         self.frontBand = frontBand
         self.backImg = backImg
         self.hue = hue
+
+        # 🔥 todo: limit stats input od 0 do 100, (i jesli mozliwe to weryfikacje innych inputow tez)
 
         for stat in self.stats:
             index = self.stats.index(stat)
@@ -69,6 +73,7 @@ class card:
                 Rewers = {self.backImg}
             ''')
         
+        
     def renderCard(self):
         print("Rendering card...")
 
@@ -87,8 +92,7 @@ class card:
 
         # nanoszenie nazwy 
 
-        _, _, wName, hName = d.textbbox((0, 0), self.name, font=font90)
-        d.text((imageWidth/2, 1200), self.name, font=font90, fill='black', align='center', anchor="mm")
+        renderText(self.name, font90, 'black', imageWidth/2, 1200, d)
 
         # nanoszenie opisu - zawijanie wierszy: textwrap, centrowanie: align='center', anchor="mm"
 
@@ -100,7 +104,7 @@ class card:
             caption_new = caption_new + ii + '\n'
         caption_new += word_list[-1]
 
-        d.multiline_text((imageWidth / 2, 1275 + hName + 50), caption_new, fill="black", font=font40, align='center', anchor="mm")
+        d.multiline_text((imageWidth / 2, 1275 + 100 + 50), caption_new, fill="black", font=font40, align='center', anchor="mm")
 
         # nanoszenie statystyk
 
@@ -110,11 +114,21 @@ class card:
 
         # rewers obok, colorize: zmiana koloru rewersu
 
-        dst = Image.new('RGBA', (2 * imageWidth, imageHeight))
-        dst.paste(accessoryLayer, (0, 0))
-        dst.paste(colorize(self.backImg, self.hue), (imageWidth, 0))
+        self.final = Image.new('RGBA', (2 * imageWidth, imageHeight))
+        self.final.paste(accessoryLayer, (0, 0))
+        self.final.paste(colorize(self.backImg, self.hue), (imageWidth, 0))
 
-        print(dst.size)
-
-        return dst
+        return self.final
         
+    def exportCardToPNG(self, destination: str):
+        # 🔥 todo: sprawdzic czy plik o takiej nazwie istnieje, jesli tak to nadac inna nazwe
+        # self.final - obiekt do zapisamia
+
+        self.final.save(destination)
+
+    def saveCardEdit(self):
+        # 🔥 todo: sprawdzic czy plik o takiej nazwie istnieje, jesli tak to nadac inna nazwe
+        # self.final - obiekt do eksportowania
+
+        with open(fr'{self.name}.card', 'wb') as handle:
+            pickle.dump(self.final, handle, protocol=pickle.HIGHEST_PROTOCOL)

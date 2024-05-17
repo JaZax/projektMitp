@@ -1,27 +1,34 @@
-import tkinter as tk
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QApplication, QMainWindow
+import sys
+
 import PIL
-from PIL import ImageTk, Image
+from PIL import Image
 
 from card import card 
 from images import *
 
-class App:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Card Generator App")
+class App(QMainWindow):
+    def __init__(self):
+        super(App, self).__init__()
 
-        self.renderGui()
+        self.setGeometry(0, 0, 1000, 600)
+        self.setWindowTitle("Generator kart kapibar")
 
-    def renderGui(self):
-        testCardObj = card("pimpek", "fajny ten pimpek", [55, 20, 100], hatMag, bodyMag, accessoryMag, template, frontBg1, frontBand, backImg, 240)
-
-        testCard = testCardObj.renderCard()
-
-        testCard = testCard.resize((450, 350), Image.LANCZOS)
-
-        image = ImageTk.PhotoImage(testCard)
-        panel = tk.Label(self.root, image = image)
+        self.initUI()
     
-        # set the image as img 
-        panel.image = image
-        panel.grid(row = 2)
+    def initUI(self):
+        self.b1 = QtWidgets.QPushButton(self)
+        self.b1.setText("test")
+        self.b1.clicked.connect(self.clicked)
+
+    def clicked(self):
+        self.b1.setText("test")
+       
+    
+def window():
+    app = QApplication(sys.argv)
+    win = App()
+
+    win.show()
+    sys.exit(app.exec_())

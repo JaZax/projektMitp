@@ -8,11 +8,11 @@ from PIL.ImageQt import ImageQt
 from card import card
 from images import *
 
-# testCard = card("agnieszka", "fajny ten pimpek", [0, 0, 100], hatMag, bodyKnight, accessoryRomantic, template, frontBg2, frontBand, backImg, 129)
+testCard = card("agnieszka", "fajny ten pimpek", [0, 0, 100], hatMag, bodyKnight, accessoryRomantic, template, frontBg2, frontBand, backImg, 330)
 
-# testCardImage = testCard.renderCard()
-# image = ImageQt(testCardImage)
-# print(image)
+testCardImage = testCard.renderCard()
+image = ImageQt(testCardImage)
+print(image)
 
 class mainWindow(QMainWindow):
     def __init__(self):
@@ -23,6 +23,9 @@ class mainWindow(QMainWindow):
         self.initUI()
 
     def initUI(self):
+
+        self.pixmap = QPixmap.fromImage(image)
+
         self.centralwidget = QtWidgets.QWidget(parent=self)
         self.centralwidget.setObjectName("centralwidget")
         self.widget = QtWidgets.QWidget(parent=self.centralwidget)
@@ -67,8 +70,12 @@ class mainWindow(QMainWindow):
         self.buttonExport = QtWidgets.QPushButton(parent=self.widget)
         self.buttonExport.setObjectName("buttonExport")
         self.gridLayout.addWidget(self.buttonExport, 7, 4, 1, 1)
+
         self.labelImagePreview = QtWidgets.QLabel(parent=self.widget)
         self.labelImagePreview.setObjectName("labelImagePreview")
+        self.labelImagePreview.setPixmap(self.pixmap)
+        self.labelImagePreview.setScaledContents(True)
+
         self.gridLayout.addWidget(self.labelImagePreview, 0, 3, 7, 2)
         self.inputStamina = QtWidgets.QSpinBox(parent=self.widget)
         self.inputStamina.setObjectName("inputStamina")
@@ -99,7 +106,7 @@ class mainWindow(QMainWindow):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Generator kart kapibar"))
-        self.buttonSave.setText(_translate("MainWindow", "Save edit file"))
+        self.buttonSave.setText(_translate("MainWindow", "Zapisz plik edytowalny"))
         self.labelHealth.setText(_translate("MainWindow", "Zdrowie"))
         self.labelDesc.setText(_translate("MainWindow", "Opis"))
         self.labelStamina.setText(_translate("MainWindow", "Stamina"))
@@ -107,8 +114,7 @@ class mainWindow(QMainWindow):
         self.labelName.setText(_translate("MainWindow", "Nazwa"))
         self.buttonGenerate.setText(_translate("MainWindow", "Generuj"))
         self.buttonAccessory.setText(_translate("MainWindow", "Akcesorium"))
-        self.buttonExport.setText(_translate("MainWindow", "Export PNG"))
-        self.labelImagePreview.setText(_translate("MainWindow", "TextLabel"))
+        self.buttonExport.setText(_translate("MainWindow", "Eksportuj PNG"))
         self.labelMana.setText(_translate("MainWindow", "Mana"))
         self.pushButton.setText(_translate("MainWindow", "Wdzianko"))
 

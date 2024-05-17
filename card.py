@@ -113,6 +113,8 @@ class card:
         dst = Image.new('RGBA', (2 * imageWidth, imageHeight))
         dst.paste(accessoryLayer, (0, 0))
         dst.paste(colorize(self.backImg, self.hue), (imageWidth, 0))
-        
+
+        print(dst.size)
+
         return dst
         

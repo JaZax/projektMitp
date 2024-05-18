@@ -26,7 +26,7 @@ class mainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Generator kart kapibar")
-        self.setGeometry(0, 0, 1160, 700)
+        self.setFixedSize(1160, 700)
 
         self.initUI()
 
@@ -236,12 +236,18 @@ class mainWindow(QMainWindow):
         self.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=self)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1140, 26))
-
         self.menubar.setObjectName("menubar")
+        self.menuplik = QtWidgets.QMenu(parent=self.menubar)
+        self.menuplik.setObjectName("menuplik")
+        
         self.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(parent=self)
         self.statusbar.setObjectName("statusbar")
         self.setStatusBar(self.statusbar)
+        self.actionotw_rz = PyQt6.QtGui.QAction(parent=self)
+        self.actionotw_rz.setObjectName("actionotw_rz")
+        self.menuplik.addAction(self.actionotw_rz)
+        self.menubar.addAction(self.menuplik.menuAction())
 
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self)
@@ -279,6 +285,8 @@ class mainWindow(QMainWindow):
         self.inputBackground.setItemText(1, _translate("MainWindow", "Niebo"))
         self.inputBackground.setItemText(2, _translate("MainWindow", "Ogień"))
         self.inputBackground.setItemText(3, _translate("MainWindow", "Inne"))
+        self.menuplik.setTitle(_translate("MainWindow", "Plik"))
+        self.actionotw_rz.setText(_translate("MainWindow", "Otwórz"))
 
 
 def window():

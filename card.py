@@ -52,7 +52,11 @@ class card:
         self.backImg = backImg
         self.hue = hue
 
-        # 🔥 todo: limit stats input od 0 do 100, (i jesli mozliwe to weryfikacje innych inputow tez)
+        # 🔥 todo: limity:
+        # name: 1-23
+        # desc: 1-125
+        # stats: 0-100
+        # hue: 0-360
 
         for stat in self.stats:
             index = self.stats.index(stat)

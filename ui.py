@@ -171,10 +171,16 @@ class Ui_MainWindow(object):
         self.menubar = QtWidgets.QMenuBar(parent=MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1140, 26))
         self.menubar.setObjectName("menubar")
+        self.menuplik = QtWidgets.QMenu(parent=self.menubar)
+        self.menuplik.setObjectName("menuplik")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(parent=MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.actionotw_rz = QtGui.QAction(parent=MainWindow)
+        self.actionotw_rz.setObjectName("actionotw_rz")
+        self.menuplik.addAction(self.actionotw_rz)
+        self.menubar.addAction(self.menuplik.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -211,6 +217,8 @@ class Ui_MainWindow(object):
         self.inputBackground.setItemText(1, _translate("MainWindow", "Niebo"))
         self.inputBackground.setItemText(2, _translate("MainWindow", "Ogień"))
         self.inputBackground.setItemText(3, _translate("MainWindow", "Inne"))
+        self.menuplik.setTitle(_translate("MainWindow", "plik"))
+        self.actionotw_rz.setText(_translate("MainWindow", "otwórz"))
 
 
 if __name__ == "__main__":

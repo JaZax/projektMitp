@@ -400,8 +400,20 @@
      <height>26</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuplik">
+    <property name="title">
+     <string>plik</string>
+    </property>
+    <addaction name="actionotw_rz"/>
+   </widget>
+   <addaction name="menuplik"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionotw_rz">
+   <property name="text">
+    <string>otwórz</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

@@ -103,7 +103,7 @@ class card:
             caption_new = caption_new + ii + '\n'
         caption_new += word_list[-1]
 
-        d.multiline_text((imageWidth / 2, 1275 + 100 + 50), caption_new, fill="black", font=font40, align='center', anchor="mm")
+        d.multiline_text((imageWidth / 2, 1405), caption_new, fill="black", font=font40, align='center', anchor="mm")
 
         # nanoszenie statystyk
 

@@ -10,13 +10,6 @@ from card import card
 from images import *
 import pickle
 
-testCard = card("12345678901234567890123", "fajeowifjoaiwjfoaiwjefoiawjefoaiwjefoiawjefiojawefoijaweofjaowiefjioawjfoiawejfoiajwefoiajwefjaweofjaiwefjoaiwjfoawjefiaweijf", ["2", "2", "2"], hatRomantic, bodyRomantic, accessoryRomantic, template, frontBg1, frontBand, backImg, 180)
-
-testCardImage = testCard.renderCard()
-
-image = ImageQt(testCardImage)
-print(image)
-
 # save card file
 #
 # testCard.saveCardEdit()
@@ -33,13 +26,30 @@ class mainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Generator kart kapibar")
-        self.setGeometry(0, 0, 1140, 700)
+        self.setGeometry(0, 0, 1160, 700)
 
         self.initUI()
 
-    def initUI(self):
-
+    def generate(self):
+        testCard = card(self.inputName.text(), 
+                        self.inputDesc.toPlainText(), 
+                        [self.inputMana.value(), self.inputStamina.value(), self.inputHealth.value()], 
+                        hatRomantic, 
+                        bodyRomantic, 
+                        accessoryRomantic, 
+                        template, 
+                        frontBg1, 
+                        frontBand, 
+                        backImg, 
+                        self.colorInputNumber.value())
+        
+        testCardImage = testCard.renderCard()
+        image = ImageQt(testCardImage)
         self.pixmap = QPixmap.fromImage(image)
+
+        self.labelImagePreview.setPixmap(self.pixmap)
+
+    def initUI(self):
 
         self.centralwidget = QtWidgets.QWidget(parent=self)
         font = PyQt6.QtGui.QFont()
@@ -66,7 +76,6 @@ class mainWindow(QMainWindow):
         self.labelImagePreview.setMaximumSize(QtCore.QSize(800, 640))
         self.labelImagePreview.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.labelImagePreview.setObjectName("labelImagePreview")
-        self.labelImagePreview.setPixmap(self.pixmap)
         self.gridLayout.addWidget(self.labelImagePreview, 0, 3, 19, 1)
         self.labelImagePreview.setScaledContents(True)
 
@@ -92,6 +101,7 @@ class mainWindow(QMainWindow):
         self.colorInputNumber.setMinimumSize(QtCore.QSize(80, 0))
         self.colorInputNumber.setMaximum(360)
         self.colorInputNumber.setObjectName("colorInputNumber")
+        self.colorInputNumber.valueChanged.connect(lambda: self.inputColor.setValue(self.colorInputNumber.value()))
         self.gridLayout.addWidget(self.colorInputNumber, 14, 2, 1, 1)
 
         self.labelColor = QtWidgets.QLabel(parent=self.widget)
@@ -118,6 +128,8 @@ class mainWindow(QMainWindow):
         self.inputColor = QtWidgets.QSlider(parent=self.widget)
         self.inputColor.setOrientation(QtCore.Qt.Orientation.Horizontal)
         self.inputColor.setObjectName("inputColor")
+        self.inputColor.setMaximum(360)
+        self.inputColor.valueChanged.connect(lambda: self.colorInputNumber.setValue(self.inputColor.value()))
         self.gridLayout.addWidget(self.inputColor, 14, 1, 1, 1)
 
         self.labelBody = QtWidgets.QLabel(parent=self.widget)
@@ -169,6 +181,7 @@ class mainWindow(QMainWindow):
         self.buttonGenerate = QtWidgets.QPushButton(parent=self.widget)
         self.buttonGenerate.setObjectName("buttonGenerate")
         self.gridLayout.addWidget(self.buttonGenerate, 16, 0, 1, 3)
+        self.buttonGenerate.clicked.connect(self.generate)
 
         self.inputDesc = QtWidgets.QPlainTextEdit(parent=self.widget)
         self.inputDesc.setMaximumSize(QtCore.QSize(16777215, 115))

@@ -19,7 +19,7 @@
      <pointsize>11</pointsize>
     </font>
    </property>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -29,41 +29,64 @@
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="5" column="0" colspan="3">
-      <widget class="Line" name="line2">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>10</height>
-        </size>
-       </property>
+     <item row="15" column="1">
+      <widget class="QSlider" name="inputColor">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
-     <item row="0" column="3" rowspan="19">
-      <widget class="QLabel" name="labelImagePreview">
-       <property name="minimumSize">
-        <size>
-         <width>800</width>
-         <height>640</height>
-        </size>
+     <item row="3" column="0">
+      <widget class="QLabel" name="labelDesc">
+       <property name="text">
+        <string>Opis</string>
        </property>
+      </widget>
+     </item>
+     <item row="19" column="0" colspan="3">
+      <widget class="QPushButton" name="buttonExport">
+       <property name="text">
+        <string>Eksportuj PNG</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0" colspan="3">
+      <widget class="QLineEdit" name="inputName">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="maxLength">
+        <number>23</number>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0" colspan="3">
+      <widget class="QPlainTextEdit" name="inputDesc">
        <property name="maximumSize">
         <size>
-         <width>800</width>
-         <height>640</height>
+         <width>16777215</width>
+         <height>115</height>
         </size>
        </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
        </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
+       <property name="plainText">
+        <string/>
        </property>
+      </widget>
+     </item>
+     <item row="18" column="0" colspan="3">
+      <widget class="QPushButton" name="buttonSave">
        <property name="text">
-        <string>Podgląd</string>
+        <string>Zapisz plik edytowalny</string>
+       </property>
+      </widget>
+     </item>
+     <item row="15" column="0">
+      <widget class="QLabel" name="labelColor">
+       <property name="text">
+        <string>Kolor</string>
        </property>
       </widget>
      </item>
@@ -77,46 +100,6 @@
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="15" column="0" colspan="3">
-      <widget class="Line" name="line5">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>10</height>
-        </size>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="labelName">
-       <property name="text">
-        <string>Nazwa</string>
-       </property>
-      </widget>
-     </item>
-     <item row="14" column="2">
-      <widget class="QSpinBox" name="colorInputNumber">
-       <property name="minimumSize">
-        <size>
-         <width>80</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximum">
-        <number>360</number>
-       </property>
-      </widget>
-     </item>
-     <item row="14" column="0">
-      <widget class="QLabel" name="labelColor">
-       <property name="text">
-        <string>Kolor</string>
        </property>
       </widget>
      </item>
@@ -149,26 +132,6 @@
        </item>
       </widget>
      </item>
-     <item row="13" column="0" colspan="3">
-      <widget class="Line" name="line4">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>10</height>
-        </size>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="14" column="1">
-      <widget class="QSlider" name="inputColor">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
      <item row="11" column="0">
       <widget class="QLabel" name="labelBody">
        <property name="text">
@@ -176,54 +139,69 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="labelMana">
-       <property name="text">
-        <string>Mana</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="labelDesc">
-       <property name="text">
-        <string>Opis</string>
-       </property>
-      </widget>
-     </item>
-     <item row="17" column="0" colspan="3">
-      <widget class="QPushButton" name="buttonSave">
-       <property name="text">
-        <string>Zapisz plik edytowalny</string>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="0" colspan="3">
-      <widget class="Line" name="line3">
+     <item row="15" column="2">
+      <widget class="QSpinBox" name="colorInputNumber">
        <property name="minimumSize">
         <size>
-         <width>0</width>
-         <height>10</height>
+         <width>80</width>
+         <height>0</height>
         </size>
        </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+       <property name="maximum">
+        <number>360</number>
        </property>
       </widget>
      </item>
-     <item row="12" column="0">
-      <widget class="QLabel" name="labelAccessory">
-       <property name="text">
-        <string>Akcesorium</string>
+     <item row="8" column="1">
+      <widget class="QSpinBox" name="inputHealth">
+       <property name="maximum">
+        <number>100</number>
        </property>
       </widget>
      </item>
-     <item row="1" column="0" colspan="3">
-      <widget class="QLineEdit" name="inputName">
-       <property name="text">
-        <string/>
+     <item row="0" column="3" rowspan="20">
+      <widget class="QLabel" name="labelImagePreview">
+       <property name="minimumSize">
+        <size>
+         <width>800</width>
+         <height>640</height>
+        </size>
        </property>
-       <property name="maxLength">
-        <number>23</number>
+       <property name="maximumSize">
+        <size>
+         <width>800</width>
+         <height>640</height>
+        </size>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="text">
+        <string>Podgląd</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QSpinBox" name="inputMana">
+       <property name="maximum">
+        <number>100</number>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QSpinBox" name="inputStamina">
+       <property name="maximum">
+        <number>100</number>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelName">
+       <property name="text">
+        <string>Nazwa</string>
        </property>
       </widget>
      </item>
@@ -256,6 +234,32 @@
        </item>
       </widget>
      </item>
+     <item row="5" column="0" colspan="3">
+      <widget class="Line" name="line2">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="0" colspan="3">
+      <widget class="Line" name="line3">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
      <item row="10" column="0">
       <widget class="QLabel" name="labelHat">
        <property name="text">
@@ -263,33 +267,16 @@
        </property>
       </widget>
      </item>
-     <item row="16" column="0" colspan="3">
-      <widget class="QPushButton" name="buttonGenerate">
-       <property name="text">
-        <string>Generuj</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0" colspan="3">
-      <widget class="QPlainTextEdit" name="inputDesc">
-       <property name="maximumSize">
+     <item row="14" column="0" colspan="3">
+      <widget class="Line" name="line4">
+       <property name="minimumSize">
         <size>
-         <width>16777215</width>
-         <height>115</height>
+         <width>0</width>
+         <height>10</height>
         </size>
        </property>
-       <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="plainText">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="18" column="0" colspan="3">
-      <widget class="QPushButton" name="buttonExport">
-       <property name="text">
-        <string>Eksportuj PNG</string>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
@@ -322,6 +309,26 @@
        </item>
       </widget>
      </item>
+     <item row="16" column="0" colspan="3">
+      <widget class="Line" name="line5">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="17" column="0" colspan="3">
+      <widget class="QPushButton" name="buttonGenerate">
+       <property name="text">
+        <string>Generuj</string>
+       </property>
+      </widget>
+     </item>
      <item row="7" column="0">
       <widget class="QLabel" name="labelStamina">
        <property name="text">
@@ -336,25 +343,49 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="1">
-      <widget class="QSpinBox" name="inputMana">
-       <property name="maximum">
-        <number>100</number>
+     <item row="6" column="0">
+      <widget class="QLabel" name="labelMana">
+       <property name="text">
+        <string>Mana</string>
        </property>
       </widget>
      </item>
-     <item row="7" column="1">
-      <widget class="QSpinBox" name="inputStamina">
-       <property name="maximum">
-        <number>100</number>
+     <item row="12" column="0">
+      <widget class="QLabel" name="labelAccessory">
+       <property name="text">
+        <string>Akcesorium</string>
        </property>
       </widget>
      </item>
-     <item row="8" column="1">
-      <widget class="QSpinBox" name="inputHealth">
-       <property name="maximum">
-        <number>100</number>
+     <item row="13" column="0">
+      <widget class="QLabel" name="labelBackground">
+       <property name="text">
+        <string>Tło</string>
        </property>
+      </widget>
+     </item>
+     <item row="13" column="1" colspan="2">
+      <widget class="QComboBox" name="inputBackground">
+       <item>
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Niebo</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Ogień</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Inne</string>
+        </property>
+       </item>
       </widget>
      </item>
     </layout>

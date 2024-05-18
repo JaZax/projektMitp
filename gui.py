@@ -86,12 +86,12 @@ class mainWindow(QMainWindow):
         self.line1.setObjectName("line1")
         self.gridLayout.addWidget(self.line1, 2, 0, 1, 3)
 
-        self.line5 = QtWidgets.QFrame(parent=self.widget)
-        self.line5.setMinimumSize(QtCore.QSize(0, 10))
-        self.line5.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line5.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line5.setObjectName("line5")
-        self.gridLayout.addWidget(self.line5, 15, 0, 1, 3)
+        self.line4 = QtWidgets.QFrame(parent=self.widget)
+        self.line4.setMinimumSize(QtCore.QSize(0, 10))
+        self.line4.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line4.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line4.setObjectName("line4")
+        self.gridLayout.addWidget(self.line4, 15, 0, 1, 3)
 
         self.labelName = QtWidgets.QLabel(parent=self.widget)
         self.labelName.setObjectName("labelName")
@@ -117,13 +117,6 @@ class mainWindow(QMainWindow):
         self.inputHat.addItem("")
         self.inputHat.addItem("")
         self.gridLayout.addWidget(self.inputHat, 10, 1, 1, 2)
-
-        self.line4 = QtWidgets.QFrame(parent=self.widget)
-        self.line4.setMinimumSize(QtCore.QSize(0, 10))
-        self.line4.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line4.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line4.setObjectName("line4")
-        self.gridLayout.addWidget(self.line4, 13, 0, 1, 3)
 
         self.inputColor = QtWidgets.QSlider(parent=self.widget)
         self.inputColor.setOrientation(QtCore.Qt.Orientation.Horizontal)
@@ -158,6 +151,19 @@ class mainWindow(QMainWindow):
         self.labelAccessory = QtWidgets.QLabel(parent=self.widget)
         self.labelAccessory.setObjectName("labelAccessory")
         self.gridLayout.addWidget(self.labelAccessory, 12, 0, 1, 1)
+
+        self.labelBackground = QtWidgets.QLabel(parent=self.widget)
+        self.labelBackground.setObjectName("labelBackground")
+        self.gridLayout.addWidget(self.labelBackground, 13, 0, 1, 1)
+
+        self.inputBackground = QtWidgets.QComboBox(parent=self.widget)
+        self.inputBackground.setObjectName("inputBackground")
+        self.inputBackground.addItem("")
+        self.inputBackground.setItemText(0, "")
+        self.inputBackground.addItem("")
+        self.inputBackground.addItem("")
+        self.inputBackground.addItem("")
+        self.gridLayout.addWidget(self.inputBackground, 13, 1, 1, 2)
 
         self.inputName = QtWidgets.QLineEdit(parent=self.widget)
         self.inputName.setMaxLength(23)
@@ -242,7 +248,7 @@ class mainWindow(QMainWindow):
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.setWindowTitle(_translate("MainWindow", "Generator kart kapibar"))
         self.labelImagePreview.setText(_translate("MainWindow", ""))
         self.labelName.setText(_translate("MainWindow", "Nazwa"))
         self.labelColor.setText(_translate("MainWindow", "Kolor"))
@@ -269,7 +275,10 @@ class mainWindow(QMainWindow):
         self.inputBody.setItemText(4, _translate("MainWindow", "Inne"))
         self.labelStamina.setText(_translate("MainWindow", "Stamina"))
         self.labelHealth.setText(_translate("MainWindow", "Zdrowie"))
-
+        self.labelBackground.setText(_translate("MainWindow", "Tło"))
+        self.inputBackground.setItemText(1, _translate("MainWindow", "Niebo"))
+        self.inputBackground.setItemText(2, _translate("MainWindow", "Ogień"))
+        self.inputBackground.setItemText(3, _translate("MainWindow", "Inne"))
 
 
 def window():

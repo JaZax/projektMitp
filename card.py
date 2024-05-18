@@ -73,7 +73,6 @@ class card:
                 Rewers = {self.backImg}
             ''')
         
-        
     def renderCard(self):
         print("Rendering card...")
 
@@ -92,7 +91,7 @@ class card:
 
         # nanoszenie nazwy 
 
-        renderText(self.name, font90, 'black', imageWidth/2, 1200, d)
+        renderText(self.name, font70, 'black', imageWidth/2, 1180, d)
 
         # nanoszenie opisu - zawijanie wierszy: textwrap, centrowanie: align='center', anchor="mm"
 
@@ -122,13 +121,13 @@ class card:
         
     def exportCardToPNG(self, destination: str):
         # 🔥 todo: sprawdzic czy plik o takiej nazwie istnieje, jesli tak to nadac inna nazwe
-        # self.final - obiekt do zapisamia
+        # self.final - obiekt do eksportowania
 
         self.final.save(destination)
 
     def saveCardEdit(self):
         # 🔥 todo: sprawdzic czy plik o takiej nazwie istnieje, jesli tak to nadac inna nazwe
-        # self.final - obiekt do eksportowania
+        # self.final - obiekt do zapisania
 
         with open(fr'{self.name}.card', 'wb') as handle:
             pickle.dump(self.final, handle, protocol=pickle.HIGHEST_PROTOCOL)

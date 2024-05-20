@@ -56,11 +56,11 @@ class card:
         # name: 1-23
         # desc: 1-125
         # stats: 0-100
+        # czy sa wszystkie obrazki
         # hue: 0-360
 
         for stat in self.stats:
             index = self.stats.index(stat)
-            
             self.stats[index] = str(stat)
 
     def printCardData(self):
@@ -134,4 +134,4 @@ class card:
         # self.final - obiekt do zapisania
 
         with open(fr'{self.name}.card', 'wb') as handle:
-            pickle.dump(self.final, handle, protocol=pickle.HIGHEST_PROTOCOL)
+            pickle.dump(self, handle, protocol=pickle.HIGHEST_PROTOCOL)

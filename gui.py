@@ -14,7 +14,6 @@ import pickle
 #
 # testCard.saveCardEdit()
 
-
 # read card file
 #
 # with open('agnieszka.card', 'rb') as handle:
@@ -26,12 +25,13 @@ class mainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Generator kart kapibar")
-        self.setFixedSize(1160, 700)
+        self.setFixedSize(1160, 710)
 
         self.initUI()
 
     def generate(self):
-        testCard = card(self.inputName.text(), 
+        # 🔥
+        self.testCard = card(self.inputName.text(), 
                         self.inputDesc.toPlainText(), 
                         [self.inputMana.value(), self.inputStamina.value(), self.inputHealth.value()], 
                         hatRomantic, 
@@ -43,11 +43,33 @@ class mainWindow(QMainWindow):
                         backImg, 
                         self.colorInputNumber.value())
         
-        testCardImage = testCard.renderCard()
+        testCardImage = self.testCard.renderCard()
+
         image = ImageQt(testCardImage)
         self.pixmap = QPixmap.fromImage(image)
 
         self.labelImagePreview.setPixmap(self.pixmap)
+
+    def openSaveFile(self):
+        # 🔥
+        path, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Wybierz plik.', '', '*.card')
+
+        with open(path, 'rb') as handle:
+            openedCard = pickle.load(handle)
+
+            openedCardImage = openedCard.renderCard()
+
+            image = ImageQt(openedCardImage)
+            self.pixmap = QPixmap.fromImage(image)
+
+            self.labelImagePreview.setPixmap(self.pixmap)
+
+    def saveFile(self):
+        # 🔥
+        # path = str(QFileDialog.getExistingDirectory(self, "Wybierz lokalizacje."))
+        
+        self.testCard.saveCardEdit()
+
 
     def initUI(self):
 
@@ -76,8 +98,8 @@ class mainWindow(QMainWindow):
         self.labelImagePreview.setMaximumSize(QtCore.QSize(800, 640))
         self.labelImagePreview.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.labelImagePreview.setObjectName("labelImagePreview")
-        self.gridLayout.addWidget(self.labelImagePreview, 0, 3, 19, 1)
         self.labelImagePreview.setScaledContents(True)
+        self.gridLayout.addWidget(self.labelImagePreview, 0, 3, 19, 1)
 
         self.line1 = QtWidgets.QFrame(parent=self.widget)
         self.line1.setMinimumSize(QtCore.QSize(0, 10))
@@ -98,7 +120,7 @@ class mainWindow(QMainWindow):
         self.gridLayout.addWidget(self.labelName, 0, 0, 1, 1)
 
         self.colorInputNumber = QtWidgets.QSpinBox(parent=self.widget)
-        self.colorInputNumber.setMinimumSize(QtCore.QSize(80, 0))
+        self.colorInputNumber.setMinimumSize(QtCore.QSize(90, 0))
         self.colorInputNumber.setMaximum(360)
         self.colorInputNumber.setObjectName("colorInputNumber")
         self.colorInputNumber.valueChanged.connect(lambda: self.inputColor.setValue(self.colorInputNumber.value()))
@@ -139,6 +161,7 @@ class mainWindow(QMainWindow):
 
         self.buttonSave = QtWidgets.QPushButton(parent=self.widget)
         self.buttonSave.setObjectName("buttonSave")
+        self.buttonSave.clicked.connect(lambda: self.testCard.saveCardEdit())
         self.gridLayout.addWidget(self.buttonSave, 17, 0, 1, 3)
 
         self.line3 = QtWidgets.QFrame(parent=self.widget)
@@ -186,8 +209,8 @@ class mainWindow(QMainWindow):
 
         self.buttonGenerate = QtWidgets.QPushButton(parent=self.widget)
         self.buttonGenerate.setObjectName("buttonGenerate")
-        self.gridLayout.addWidget(self.buttonGenerate, 16, 0, 1, 3)
         self.buttonGenerate.clicked.connect(self.generate)
+        self.gridLayout.addWidget(self.buttonGenerate, 16, 0, 1, 3)
 
         self.inputDesc = QtWidgets.QPlainTextEdit(parent=self.widget)
         self.inputDesc.setMaximumSize(QtCore.QSize(16777215, 115))
@@ -198,6 +221,7 @@ class mainWindow(QMainWindow):
 
         self.buttonExport = QtWidgets.QPushButton(parent=self.widget)
         self.buttonExport.setObjectName("buttonExport")
+        self.buttonExport.clicked.connect(lambda: self.testCard.exportCardToPNG("./karta.png"))
         self.gridLayout.addWidget(self.buttonExport, 18, 0, 1, 3)
 
         self.inputBody = QtWidgets.QComboBox(parent=self.widget)
@@ -244,8 +268,11 @@ class mainWindow(QMainWindow):
         self.statusbar = QtWidgets.QStatusBar(parent=self)
         self.statusbar.setObjectName("statusbar")
         self.setStatusBar(self.statusbar)
+
         self.actionotw_rz = PyQt6.QtGui.QAction(parent=self)
         self.actionotw_rz.setObjectName("actionotw_rz")
+        self.actionotw_rz.triggered.connect(self.openSaveFile)
+
         self.menuplik.addAction(self.actionotw_rz)
         self.menubar.addAction(self.menuplik.menuAction())
 

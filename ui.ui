@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>generatorKartKapibar</class>
+ <widget class="QMainWindow" name="generatorKartKapibar">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1140</width>
-    <height>700</height>
+    <width>1160</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>generator Kart Kapibar</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="font">
@@ -25,122 +25,14 @@
       <x>10</x>
       <y>10</y>
       <width>1140</width>
-      <height>642</height>
+      <height>670</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="15" column="0">
-      <widget class="QLabel" name="labelColor">
-       <property name="text">
-        <string>Kolor</string>
-       </property>
-      </widget>
-     </item>
-     <item row="13" column="0">
-      <widget class="QLabel" name="labelBackground">
-       <property name="text">
-        <string>Tło</string>
-       </property>
-      </widget>
-     </item>
-     <item row="12" column="2">
-      <widget class="QToolButton" name="toolButton_3">
+     <item row="10" column="2">
+      <widget class="QToolButton" name="inputHatOther">
        <property name="text">
         <string>...</string>
-       </property>
-      </widget>
-     </item>
-     <item row="18" column="0" colspan="3">
-      <widget class="QPushButton" name="buttonSave">
-       <property name="text">
-        <string>Zapisz plik edytowalny</string>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="0">
-      <widget class="QLabel" name="labelBody">
-       <property name="text">
-        <string>Wdzianko</string>
-       </property>
-      </widget>
-     </item>
-     <item row="15" column="1">
-      <widget class="QSlider" name="inputColor">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="17" column="0" colspan="3">
-      <widget class="QPushButton" name="buttonGenerate">
-       <property name="text">
-        <string>Generuj</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0" colspan="3">
-      <widget class="Line" name="line1">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>10</height>
-        </size>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="1">
-      <widget class="QSpinBox" name="inputHealth">
-       <property name="maximum">
-        <number>100</number>
-       </property>
-      </widget>
-     </item>
-     <item row="16" column="0" colspan="3">
-      <widget class="Line" name="line5">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>10</height>
-        </size>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="labelName">
-       <property name="text">
-        <string>Nazwa</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" colspan="3">
-      <widget class="QLineEdit" name="inputName">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="maxLength">
-        <number>23</number>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0" colspan="3">
-      <widget class="QPlainTextEdit" name="inputDesc">
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>115</height>
-        </size>
-       </property>
-       <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="plainText">
-        <string/>
        </property>
       </widget>
      </item>
@@ -157,31 +49,29 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="labelMana">
-       <property name="text">
-        <string>Mana</string>
+     <item row="9" column="0" colspan="3">
+      <widget class="Line" name="line3">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
-     <item row="8" column="0">
-      <widget class="QLabel" name="labelHealth">
-       <property name="text">
-        <string>Zdrowie</string>
+     <item row="2" column="0" colspan="3">
+      <widget class="Line" name="line1">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>10</height>
+        </size>
        </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="labelDesc">
-       <property name="text">
-        <string>Opis</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="0">
-      <widget class="QLabel" name="labelHat">
-       <property name="text">
-        <string>Czapka</string>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
@@ -189,6 +79,96 @@
       <widget class="QLabel" name="labelAccessory">
        <property name="text">
         <string>Akcesorium</string>
+       </property>
+      </widget>
+     </item>
+     <item row="13" column="2">
+      <widget class="QToolButton" name="inputBackgroundOther">
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="1">
+      <widget class="QComboBox" name="inputAccessory">
+       <item>
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Mag</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Rycerz</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Romantyk</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="15" column="1">
+      <widget class="QSlider" name="inputColor">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="15" column="0">
+      <widget class="QLabel" name="labelColor">
+       <property name="text">
+        <string>Kolor</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="2">
+      <widget class="QToolButton" name="inputBodyOther">
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="1">
+      <widget class="QComboBox" name="inputBody">
+       <item>
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Mag</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Rycerz</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Romantyk</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelName">
+       <property name="text">
+        <string>Nazwa</string>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="2">
+      <widget class="QToolButton" name="inputAccessoryOther">
+       <property name="text">
+        <string>...</string>
        </property>
       </widget>
      </item>
@@ -209,17 +189,113 @@
          <string>Ogień</string>
         </property>
        </item>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="QSpinBox" name="inputHealth">
+       <property name="maximum">
+        <number>100</number>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="labelStamina">
+       <property name="text">
+        <string>Stamina</string>
+       </property>
+      </widget>
+     </item>
+     <item row="14" column="0" colspan="3">
+      <widget class="Line" name="line4">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1">
+      <widget class="QComboBox" name="inputHat">
        <item>
         <property name="text">
-         <string>Inne</string>
+         <string/>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Mag</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Rycerz</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Romantyk</string>
         </property>
        </item>
       </widget>
      </item>
-     <item row="19" column="0" colspan="3">
-      <widget class="QPushButton" name="buttonExport">
+     <item row="7" column="1">
+      <widget class="QSpinBox" name="inputStamina">
+       <property name="maximum">
+        <number>100</number>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0" colspan="3">
+      <widget class="QLineEdit" name="inputName">
        <property name="text">
-        <string>Eksportuj PNG</string>
+        <string/>
+       </property>
+       <property name="maxLength">
+        <number>23</number>
+       </property>
+      </widget>
+     </item>
+     <item row="16" column="0" colspan="3">
+      <widget class="Line" name="line5">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0">
+      <widget class="QLabel" name="labelBody">
+       <property name="text">
+        <string>Wdzianko</string>
+       </property>
+      </widget>
+     </item>
+     <item row="15" column="2">
+      <widget class="QSpinBox" name="inputColorNumber">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximum">
+        <number>360</number>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="labelHealth">
+       <property name="text">
+        <string>Zdrowie</string>
        </property>
       </widget>
      </item>
@@ -248,164 +324,33 @@
        </property>
       </widget>
      </item>
-     <item row="12" column="1">
-      <widget class="QComboBox" name="inputAccessory">
-       <item>
-        <property name="text">
-         <string/>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Mag</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Rycerz</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Romantyk</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Inne</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item row="13" column="2">
-      <widget class="QToolButton" name="toolButton_4">
-       <property name="text">
-        <string>...</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="1">
-      <widget class="QSpinBox" name="inputStamina">
-       <property name="maximum">
-        <number>100</number>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="0">
-      <widget class="QLabel" name="labelStamina">
-       <property name="text">
-        <string>Stamina</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="1">
-      <widget class="QComboBox" name="inputHat">
-       <item>
-        <property name="text">
-         <string/>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Mag</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Rycerz</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Romantyk</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Inne</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item row="10" column="2">
-      <widget class="QToolButton" name="toolButton">
-       <property name="text">
-        <string>...</string>
-       </property>
-      </widget>
-     </item>
-     <item row="14" column="0" colspan="3">
-      <widget class="Line" name="line4">
-       <property name="minimumSize">
+     <item row="4" column="0" colspan="3">
+      <widget class="QPlainTextEdit" name="inputDesc">
+       <property name="maximumSize">
         <size>
-         <width>0</width>
-         <height>10</height>
+         <width>16777215</width>
+         <height>115</height>
         </size>
        </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="plainText">
+        <string/>
        </property>
       </widget>
      </item>
-     <item row="11" column="1">
-      <widget class="QComboBox" name="inputBody">
-       <item>
-        <property name="text">
-         <string/>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Mag</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Rycerz</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Romantyk</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Inne</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item row="9" column="0" colspan="3">
-      <widget class="Line" name="line3">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>10</height>
-        </size>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="15" column="2">
-      <widget class="QSpinBox" name="colorInputNumber">
-       <property name="minimumSize">
-        <size>
-         <width>80</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximum">
-        <number>360</number>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="2">
-      <widget class="QToolButton" name="toolButton_2">
+     <item row="13" column="0">
+      <widget class="QLabel" name="labelBackground">
        <property name="text">
-        <string>...</string>
+        <string>Tło</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="labelMana">
+       <property name="text">
+        <string>Mana</string>
        </property>
       </widget>
      </item>
@@ -413,6 +358,49 @@
       <widget class="QSpinBox" name="inputMana">
        <property name="maximum">
         <number>100</number>
+       </property>
+      </widget>
+     </item>
+     <item row="18" column="0" rowspan="2" colspan="3">
+      <widget class="QPushButton" name="buttonGenerate">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Generuj</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0">
+      <widget class="QLabel" name="labelHat">
+       <property name="text">
+        <string>Czapka</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="labelDesc">
+       <property name="text">
+        <string>Opis</string>
+       </property>
+      </widget>
+     </item>
+     <item row="17" column="0" colspan="3">
+      <widget class="QLabel" name="labelStatus">
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Wpisz dane</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -424,22 +412,34 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1140</width>
+     <width>1160</width>
      <height>26</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuplik">
+   <widget class="QMenu" name="menuPlik">
     <property name="title">
-     <string>plik</string>
+     <string>Plik</string>
     </property>
-    <addaction name="actionotw_rz"/>
+    <addaction name="menuOtworz"/>
+    <addaction name="menuSave"/>
+    <addaction name="menuExport"/>
    </widget>
-   <addaction name="menuplik"/>
+   <addaction name="menuPlik"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionotw_rz">
+  <action name="menuOtworz">
    <property name="text">
-    <string>otwórz</string>
+    <string>Otwórz</string>
+   </property>
+  </action>
+  <action name="menuSave">
+   <property name="text">
+    <string>Zapisz plik edytowalny</string>
+   </property>
+  </action>
+  <action name="menuExport">
+   <property name="text">
+    <string>Eksportuj PNG</string>
    </property>
   </action>
  </widget>

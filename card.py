@@ -43,11 +43,19 @@ class card:
         self.name = name
         self.desc = desc
         self.stats = stats # (mana, stamina, health)
+
         self.hat = hat
+        self.hatName = self.hat.filename
         self.body = body
+        self.bodyName = self.body.filename
         self.accessory = accessory
+        self.accessoryName = self.accessory.filename
+
         self.template = template
+
         self.frontBg = frontBg
+        self.frontBgName = self.frontBg.filename
+
         self.frontBand = frontBand
         self.backImg = backImg
         self.hue = hue
@@ -127,11 +135,11 @@ class card:
         # 🔥 todo: sprawdzic czy plik o takiej nazwie istnieje, jesli tak to nadac inna nazwe
         # self.final - obiekt do eksportowania
 
-        self.final.save(destination)
+        self.final.save(fr'{destination}/{self.name}.png')
 
-    def saveCardEdit(self):
+    def saveCardEdit(self, destination: str):
         # 🔥 todo: sprawdzic czy plik o takiej nazwie istnieje, jesli tak to nadac inna nazwe
         # self.final - obiekt do zapisania
 
-        with open(fr'{self.name}.card', 'wb') as handle:
+        with open(fr'{destination}/{self.name}.card', 'wb') as handle:
             pickle.dump(self, handle, protocol=pickle.HIGHEST_PROTOCOL)

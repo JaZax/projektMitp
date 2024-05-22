@@ -115,6 +115,9 @@
      </item>
      <item row="15" column="1">
       <widget class="QSlider" name="inputColor">
+       <property name="maximum">
+        <number>360</number>
+       </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -313,6 +316,11 @@
          <height>640</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
        <property name="autoFillBackground">
         <bool>false</bool>
        </property>
@@ -321,6 +329,9 @@
        </property>
        <property name="text">
         <string>Podgląd</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>

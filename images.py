@@ -1,5 +1,22 @@
 from PIL import Image
 
+nameTranslate = {
+    "hatMag": "Mag",
+    "bodyMag": "Mag",
+    "accessoryMag": "Mag",
+
+    "hatKnight": "Rycerz",
+    "bodyKnight": "Rycerz",
+    "accessoryKnight": "Rycerz",
+
+    "hatRomantic": "Romantyk",
+    "bodyRomantic": "Romantyk",
+    "accessoryRomantic": "Romantyk",
+
+    "frontBg1": "Niebo",
+    "frontBg2": "Ogień",
+}
+
 template = Image.open(fr"img\template1.png")
 frontBg1 = Image.open(fr"img\frontBg1.png")
 frontBg2 = Image.open(fr"img\frontBg2.png")

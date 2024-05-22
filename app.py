@@ -6,12 +6,11 @@ from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QApplication, QMainWindow
 
 from PIL.ImageQt import ImageQt
-from PIL import Image
 
 from card import card
 from images import *
+from threading import *
 import pickle
-
 
 class Window(QMainWindow):
     def __init__(self):
@@ -21,20 +20,28 @@ class Window(QMainWindow):
 
         self.syncColorInputs()
 
-        # Linijka zapewniająca to że obrazek bedzie odpowiednio wyskalowany pod label
+        # Skalowanie obrazka pod label
         self.labelImagePreview.setScaledContents(True)
 
         # Podpinanie funkcji do menu i przycisku
         self.menuOtworz.triggered.connect(self.openSaveFile)
         self.menuSave.triggered.connect(self.saveFile)
         self.menuExport.triggered.connect(self.exportFile)
-        self.buttonGenerate.clicked.connect(self.generate)
+        self.buttonGenerate.clicked.connect(self.thread)
 
 
     def syncColorInputs(self):
-        # Funkcja ustawiająca oba inputy od koloru (suwak i pole) na te same wartości
+        # ustawianie obu inputów od koloru (suwak i pole) na te same wartości
         self.inputColorNumber.valueChanged.connect(lambda: self.inputColor.setValue(self.inputColorNumber.value()))
         self.inputColor.valueChanged.connect(lambda: self.inputColorNumber.setValue(self.inputColor.value()))
+
+
+    def thread(self): 
+        self.labelStatus.setText('Generowanie...')
+        self.labelStatus.setStyleSheet('background-color: #ffe645') 
+
+        t1=Thread(target=self.generate) 
+        t1.start() 
 
 
     def generate(self):

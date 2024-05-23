@@ -1,14 +1,14 @@
 import sys
-from pathlib import Path    
-import PyQt6
+from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6 import uic, QtWidgets
 from PyQt6.QtGui import QPixmap
-from PyQt6.QtWidgets import QApplication, QMainWindow
 
 from PIL.ImageQt import ImageQt
 
 from card import card
 from images import *
+
+from pathlib import Path  
 from threading import *
 import pickle
 
@@ -17,6 +17,25 @@ class Window(QMainWindow):
         super().__init__()
         # Załadowanie UI z wygenerowanego przez designer pliku
         uic.loadUi("./ui.ui", self)
+
+        self.inputHat.setItemData(0, None)
+        self.inputHat.setItemData(1, hatMag)
+        self.inputHat.setItemData(2, hatKnight)
+        self.inputHat.setItemData(3, hatRomantic)
+
+        self.inputBody.setItemData(0, None)
+        self.inputBody.setItemData(1, bodyMag)
+        self.inputBody.setItemData(2, bodyKnight)
+        self.inputBody.setItemData(3, bodyRomantic)
+
+        self.inputAccessory.setItemData(0, None)
+        self.inputAccessory.setItemData(1, accessoryMag)
+        self.inputAccessory.setItemData(2, accessoryKnight)
+        self.inputAccessory.setItemData(3, accessoryRomantic)
+
+        self.inputBackground.setItemData(0, None)
+        self.inputBackground.setItemData(1, frontBg1)
+        self.inputBackground.setItemData(2, frontBg2)
 
         self.syncColorInputs()
 
@@ -45,18 +64,15 @@ class Window(QMainWindow):
 
 
     def generate(self):
-
-        # print(self.inputHat.currentText())
-
         try:
             self.testCard = card(self.inputName.text(), 
                             self.inputDesc.toPlainText(), 
                             [self.inputMana.value(), self.inputStamina.value(), self.inputHealth.value()], 
-                            hatRomantic, 
-                            bodyKnight,
-                            accessoryMag, 
+                            self.inputHat.currentData(), 
+                            self.inputBody.currentData(),
+                            self.inputAccessory.currentData(), 
                             template, 
-                            frontBg1, 
+                            self.inputBackground.currentData(), 
                             frontBand, 
                             backImg, 
                             self.inputColorNumber.value())
@@ -74,7 +90,7 @@ class Window(QMainWindow):
         except Exception as error:
             print(error)
 
-            self.labelStatus.setText(fr'Nie udało sie :(')
+            self.labelStatus.setText(str(error))
             self.labelStatus.setStyleSheet('background-color: #ff6b66') 
 
     
@@ -109,11 +125,14 @@ class Window(QMainWindow):
                 self.inputBackground.setCurrentIndex(indexFrontBg)
                 self.inputColor.setValue(openedCard.hue)
                 self.inputColorNumber.setValue(openedCard.hue)
+
+                self.labelStatus.setText('Otworzono zapisany plik :)')
+                self.labelStatus.setStyleSheet('background-color: #5dbbe3')
                 
         except Exception as error:
             print(error)
 
-            self.labelStatus.setText(fr'Nie udało sie :(')
+            self.labelStatus.setText(fr'Nie udało się otworzyć pliku')
             self.labelStatus.setStyleSheet('background-color: #ff6b66') 
 
 

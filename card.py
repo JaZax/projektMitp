@@ -67,6 +67,9 @@ class card:
         # czy sa wszystkie obrazki
         # hue: 0-360
 
+        if len(desc) == 0:
+            raise Exception("Brak opisu")
+
         for stat in self.stats:
             index = self.stats.index(stat)
             self.stats[index] = str(stat)
@@ -84,10 +87,8 @@ class card:
                 Obwódka = {self.frontBand}
                 Rewers = {self.backImg}
             ''')
-        
-    def renderCard(self):
-        print("Rendering card...")
 
+    def renderCard(self):
         imageWidth, imageHeight = self.template.size
 
         # nakładanie na siebie kolejnych warstw z parametrami

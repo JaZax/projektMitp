@@ -39,25 +39,26 @@ def colorize(image, hue):
 # klasa tworząca karte z podanych parametrów
 
 class card:
-    def __init__(self, name: str, desc: str, stats: list, hat, body, accessory, template, frontBg, frontBand, backImg, hue: int):
+    def __init__(self, name: str, desc: str, stats: list, hat: str, body: str, accessory: str, template: str, frontBg: str, frontBand: str, backImg: str, hue: int):
         self.name = name
         self.desc = desc
         self.stats = stats # (mana, stamina, health)
 
-        self.hat = hat
+        self.hat = Image.open(hat)
         self.hatName = self.hat.filename
-        self.body = body
+
+        self.body = Image.open(body)
         self.bodyName = self.body.filename
-        self.accessory = accessory
+        self.accessory = Image.open(accessory)
         self.accessoryName = self.accessory.filename
 
-        self.template = template
+        self.template = Image.open(template)
 
-        self.frontBg = frontBg
+        self.frontBg = Image.open(frontBg)
         self.frontBgName = self.frontBg.filename
 
-        self.frontBand = frontBand
-        self.backImg = backImg
+        self.frontBand = Image.open(frontBand)
+        self.backImg = Image.open(backImg)
         self.hue = hue
 
         # 🔥 todo: limity:

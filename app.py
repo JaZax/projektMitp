@@ -6,7 +6,7 @@ from PyQt6.QtGui import QPixmap
 from PIL.ImageQt import ImageQt
 
 from card import card
-from images import *
+from translateAtts import *
 
 from pathlib import Path  
 from threading import *
@@ -18,29 +18,47 @@ class Window(QMainWindow):
         # Załadowanie UI z wygenerowanego przez designer pliku
         uic.loadUi("./ui.ui", self)
 
+        self.cardData = {
+            "name": "",
+            "desc": "",
+            "stats": [0, 0, 0,],
+            "hat": "",
+            "body": "",
+            "accessory": "",
+            "template": "",
+            "frontBg": "",
+            "frontBand": "",
+            "backImg": "",
+            "hue": 0
+        }
+
         self.inputHat.setItemData(0, None)
-        self.inputHat.setItemData(1, hatMag)
-        self.inputHat.setItemData(2, hatKnight)
-        self.inputHat.setItemData(3, hatRomantic)
+        self.inputHat.setItemData(1, fr"img\hatMag.png")
+        self.inputHat.setItemData(2, fr"img\hatKnight.png")
+        self.inputHat.setItemData(3, fr"img\hatRomantic.png")
 
         self.inputBody.setItemData(0, None)
-        self.inputBody.setItemData(1, bodyMag)
-        self.inputBody.setItemData(2, bodyKnight)
-        self.inputBody.setItemData(3, bodyRomantic)
+        self.inputBody.setItemData(1, fr"img\bodyMag.png")
+        self.inputBody.setItemData(2, fr"img\bodyKnight.png")
+        self.inputBody.setItemData(3, fr"img\bodyRomantic.png")
 
         self.inputAccessory.setItemData(0, None)
-        self.inputAccessory.setItemData(1, accessoryMag)
-        self.inputAccessory.setItemData(2, accessoryKnight)
-        self.inputAccessory.setItemData(3, accessoryRomantic)
+        self.inputAccessory.setItemData(1, fr"img\accessoryMag.png")
+        self.inputAccessory.setItemData(2, fr"img\accessoryKnight.png")
+        self.inputAccessory.setItemData(3, fr"img\accessoryRomantic.png")
 
         self.inputBackground.setItemData(0, None)
-        self.inputBackground.setItemData(1, frontBg1)
-        self.inputBackground.setItemData(2, frontBg2)
+        self.inputBackground.setItemData(1, fr"img\frontBg1.png")
+        self.inputBackground.setItemData(2, fr"img\frontBg2.png")
 
-        self.syncColorInputs()
+        self.inputHatOther.clicked.connect(lambda: self.customAttr("hat"))
+        self.inputBodyOther.clicked.connect(lambda: self.customAttr("body"))
+        self.inputAccessoryOther.clicked.connect(lambda: self.customAttr("accessory"))
+        self.inputBackgroundOther.clicked.connect(lambda: self.customAttr("frontBg"))
 
-        # Skalowanie obrazka pod label
-        self.labelImagePreview.setScaledContents(True)
+        # ustawianie obu inputów od koloru (suwak i pole) na te same wartości
+        self.inputColorNumber.valueChanged.connect(lambda: self.inputColor.setValue(self.inputColorNumber.value()))
+        self.inputColor.valueChanged.connect(lambda: self.inputColorNumber.setValue(self.inputColor.value()))
 
         # Podpinanie funkcji do menu i przycisku
         self.menuOtworz.triggered.connect(self.openSaveFile)
@@ -48,16 +66,24 @@ class Window(QMainWindow):
         self.menuExport.triggered.connect(self.exportFile)
         self.buttonGenerate.clicked.connect(self.thread)
 
+        # Skalowanie obrazka pod label
+        self.labelImagePreview.setScaledContents(True)
 
-    def syncColorInputs(self):
-        # ustawianie obu inputów od koloru (suwak i pole) na te same wartości
-        self.inputColorNumber.valueChanged.connect(lambda: self.inputColor.setValue(self.inputColorNumber.value()))
-        self.inputColor.valueChanged.connect(lambda: self.inputColorNumber.setValue(self.inputColor.value()))
 
+    def alert(self, message, color):
+        self.labelStatus.setText(message)
+        self.labelStatus.setStyleSheet(f'background-color: {color}')
+
+
+    def customAttr(self, attr):
+        path, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Wybierz plik.', '', '*.png')
+
+        self.cardData[attr] = path
+
+        print(self.cardData)
 
     def thread(self): 
-        self.labelStatus.setText('Generowanie...')
-        self.labelStatus.setStyleSheet('background-color: #ffe645') 
+        self.alert('generowanie', '#ffe645')
 
         t1=Thread(target=self.generate) 
         t1.start() 
@@ -71,10 +97,10 @@ class Window(QMainWindow):
                             self.inputHat.currentData(), 
                             self.inputBody.currentData(),
                             self.inputAccessory.currentData(), 
-                            template, 
+                            fr"img\template1.png", 
                             self.inputBackground.currentData(), 
-                            frontBand, 
-                            backImg, 
+                            fr"img\frontBand1.png", 
+                            fr"img\backImg1.png", 
                             self.inputColorNumber.value())
 
 
@@ -84,14 +110,10 @@ class Window(QMainWindow):
             self.pixmap = QPixmap.fromImage(image)
             self.labelImagePreview.setPixmap(self.pixmap)
 
-            self.labelStatus.setText('Wygenerowano :)')
-            self.labelStatus.setStyleSheet('background-color: #a8ff66') 
+            self.alert('Wygenerowano', '#a8ff66')
 
         except Exception as error:
-            print(error)
-
-            self.labelStatus.setText(str(error))
-            self.labelStatus.setStyleSheet('background-color: #ff6b66') 
+            self.alert(error, '#ff6b66')
 
     
     def openSaveFile(self):
@@ -107,7 +129,7 @@ class Window(QMainWindow):
                 accessoryName = Path(openedCard.accessoryName).stem
                 frontBgName = Path(openedCard.frontBgName).stem
 
-                # "Przetłumaczenie" uzyskanej nazwy pliku na nazwe która może być w comboboxie (nameTranslate -> images.py), później kolejne przetłumaczenie tym razem do odpowiedniego indexu w comboboxie
+                # "Przetłumaczenie" uzyskanej nazwy pliku na nazwe która może być w comboboxie (nameTranslate -> translateAtts.py), później kolejne przetłumaczenie tym razem do odpowiedniego indexu w comboboxie
                 indexHat = self.inputHat.findText(nameTranslate[hatName])
                 indexBody = self.inputBody.findText(nameTranslate[bodyName])
                 indexAccessory = self.inputAccessory.findText(nameTranslate[accessoryName])
@@ -126,24 +148,30 @@ class Window(QMainWindow):
                 self.inputColor.setValue(openedCard.hue)
                 self.inputColorNumber.setValue(openedCard.hue)
 
-                self.labelStatus.setText('Otworzono zapisany plik :)')
-                self.labelStatus.setStyleSheet('background-color: #5dbbe3')
+                self.alert('Otworzono plik', '#a8ff66')
                 
         except Exception as error:
-            print(error)
-
-            self.labelStatus.setText(fr'Nie udało się otworzyć pliku')
-            self.labelStatus.setStyleSheet('background-color: #ff6b66') 
+            self.alert('Nie udało się otworzyć pliku', '#ff6b66')
 
 
     def saveFile(self):
-        path = str(QtWidgets.QFileDialog.getExistingDirectory(self, "Wybierz lokalizacje."))
-        self.testCard.saveCardEdit(path)
+        try:
+            path = str(QtWidgets.QFileDialog.getExistingDirectory(self, "Wybierz lokalizacje."))
+            self.testCard.saveCardEdit(path)
+
+            self.alert('Zapisano', '#a8ff66')
+        except:
+            self.alert('Nie udało się zapisać pliku', '#ff6b66') 
 
     
     def exportFile(self):
-        path = str(QtWidgets.QFileDialog.getExistingDirectory(self, "Wybierz lokalizacje."))
-        self.testCard.exportCardToPNG(path)
+        try:
+            path = str(QtWidgets.QFileDialog.getExistingDirectory(self, "Wybierz lokalizacje."))
+            self.testCard.exportCardToPNG(path)
+
+            self.alert('Wyeksportowano', '#a8ff66')
+        except:
+            self.alert('Nie udało się eksportować pliku', '#ff6b66') 
 
 
 if __name__ == "__main__":

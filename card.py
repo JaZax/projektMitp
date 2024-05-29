@@ -44,13 +44,26 @@ class card:
         self.desc = desc
         self.stats = stats # (mana, stamina, health)
 
-        self.hat = Image.open(hat)
-        self.hatName = self.hat.filename
+        self.hat = ""
+        self.hatName = ""
+        if len(hat) > 0:   
+            self.hat = Image.open(hat)
+            self.hatName = self.hat.filename
+        else: pass
 
-        self.body = Image.open(body)
-        self.bodyName = self.body.filename
-        self.accessory = Image.open(accessory)
-        self.accessoryName = self.accessory.filename
+        self.body = ""
+        self.bodyName = ""
+        if len(body) > 0:
+            self.body = Image.open(body)
+            self.bodyName = self.body.filename
+        else: pass
+
+        self.accessory = ""
+        self.accessoryName = ""
+        if len(accessory) > 0:
+            self.accessory = Image.open(accessory)
+            self.accessoryName = self.accessory.filename
+        else: pass
 
         self.template = Image.open(template)
 
@@ -65,15 +78,12 @@ class card:
         # name: 1-23
         # desc: 1-125
         # stats: 0-100
-        # czy sa wszystkie obrazki
         # hue: 0-360
-
-        if len(desc) == 0:
-            raise Exception("Brak opisu")
 
         for stat in self.stats:
             index = self.stats.index(stat)
             self.stats[index] = str(stat)
+
 
     def printCardData(self):
         print(f'''
@@ -89,6 +99,7 @@ class card:
                 Rewers = {self.backImg}
             ''')
 
+
     def renderCard(self):
         imageWidth, imageHeight = self.template.size
 
@@ -97,9 +108,20 @@ class card:
 
         bgLayer = Image.alpha_composite(self.frontBg, self.template)
         bandLayer = Image.alpha_composite(bgLayer, colorize(self.frontBand, self.hue))
-        hatLayer = Image.alpha_composite(bandLayer, self.hat)
-        bodyLayer = Image.alpha_composite(hatLayer, self.body)
-        accessoryLayer = Image.alpha_composite(bodyLayer, self.accessory)
+
+        # to samo, ale ze sprawdzaniem czy renderować z atrybutem czy nie
+
+        if len(self.hatName) > 0:
+            hatLayer = Image.alpha_composite(bandLayer, self.hat)
+        else:    hatLayer = bandLayer
+
+        if len(self.bodyName) > 0:
+            bodyLayer = Image.alpha_composite(hatLayer, self.body)
+        else:   bodyLayer = hatLayer
+
+        if len(self.accessoryName) > 0:
+            accessoryLayer = Image.alpha_composite(bodyLayer, self.accessory)
+        else:   accessoryLayer = bodyLayer
 
         d = ImageDraw.Draw(accessoryLayer)
 
@@ -109,15 +131,18 @@ class card:
 
         # nanoszenie opisu - zawijanie wierszy: textwrap, centrowanie: align='center', anchor="mm"
 
-        wrapperDesc = textwrap.TextWrapper(width=20)
-        word_list = wrapperDesc.wrap(text=self.desc)
+        if len(self.desc) == 0:
+            pass
+        else:
+            wrapperDesc = textwrap.TextWrapper(width=25)
+            word_list = wrapperDesc.wrap(text=self.desc)
 
-        caption_new = ''
-        for ii in word_list[:-1]:
-            caption_new = caption_new + ii + '\n'
-        caption_new += word_list[-1]
+            caption_new = ''
+            for ii in word_list[:-1]:
+                caption_new = caption_new + ii + '\n'
+            caption_new += word_list[-1]
 
-        d.multiline_text((imageWidth / 2, 1405), caption_new, fill="black", font=font40, align='center', anchor="mm")
+            d.multiline_text((imageWidth / 2, 1405), caption_new, fill="black", font=font40, align='center', anchor="mm")
 
         # nanoszenie statystyk
 
@@ -133,15 +158,14 @@ class card:
 
         return self.final
         
-    def exportCardToPNG(self, destination: str):
-        # 🔥 todo: sprawdzic czy plik o takiej nazwie istnieje, jesli tak to nadac inna nazwe
-        # self.final - obiekt do eksportowania
 
-        self.final.save(fr'{destination}/{self.name}.png')
+    def exportCardToPDF(self, destination: str):
+        if destination: self.final.save(destination)
+        else: raise Exception("Brak lokalizacji eksportowanego pliku")
+
 
     def saveCardEdit(self, destination: str):
-        # 🔥 todo: sprawdzic czy plik o takiej nazwie istnieje, jesli tak to nadac inna nazwe
-        # self.final - obiekt do zapisania
-
-        with open(fr'{destination}/{self.name}.card', 'wb') as handle:
-            pickle.dump(self, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        if destination: 
+            with open(destination, 'wb') as handle:
+                pickle.dump(self, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        else: raise Exception("Brak lokalizacji zapisywanego pliku")

@@ -74,12 +74,6 @@ class card:
         self.backImg = Image.open(backImg)
         self.hue = hue
 
-        # 🔥 todo: limity:
-        # name: 1-23
-        # desc: 1-125
-        # stats: 0-100
-        # hue: 0-360
-
         for stat in self.stats:
             index = self.stats.index(stat)
             self.stats[index] = str(stat)

@@ -54,15 +54,8 @@ class Window(QMainWindow):
         self.inputAccessory.setItemData(2, fr"img\accessoryKnight.png")
         self.inputAccessory.setItemData(3, fr"img\accessoryRomantic.png")
 
-        self.inputBackground.setItemData(0, fr"")
-        self.inputBackground.setItemData(1, fr"img\frontBg1.png")
-        self.inputBackground.setItemData(2, fr"img\frontBg2.png")
-
-        # ustawianie customowych atybutów
-        self.inputHatOther.clicked.connect(lambda: self.customAttr("hat"))
-        self.inputBodyOther.clicked.connect(lambda: self.customAttr("body"))
-        self.inputAccessoryOther.clicked.connect(lambda: self.customAttr("accessory"))
-        self.inputBackgroundOther.clicked.connect(lambda: self.customAttr("frontBg"))
+        self.inputBackground.setItemData(0, fr"img\frontBg1.png")
+        self.inputBackground.setItemData(1, fr"img\frontBg2.png")
 
         # ustawianie obu inputów od koloru (suwak i pole) na te same wartości
         self.inputColorNumber.valueChanged.connect(lambda: self.inputColor.setValue(self.inputColorNumber.value()))
@@ -86,14 +79,6 @@ class Window(QMainWindow):
     def alert(self, message, color):
         self.labelStatus.setText(message)
         self.labelStatus.setStyleSheet(f'background-color: {color}')
-
-
-    def customAttr(self, attr):
-        path, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Wybierz plik.', '', '*.png')
-
-        self.cardData[attr] = path
-
-        print(self.cardData)
 
 
     def thread(self): 
@@ -140,7 +125,7 @@ class Window(QMainWindow):
                 openedCard = pickle.load(handle)
 
                 # Uzyskanie nazw plików atrybutów bez ścieżki i rozszerzenia
-                # "Przetłumaczenie" uzyskanej nazwy pliku na nazwe która może być w comboboxie (nameTranslate -> translateAtts.py), później kolejne przetłumaczenie tym razem do odpowiedniego indexu w comboboxie
+                # "Przetłumaczenie" uzyskanej nazwy pliku na nazwe która może być w comboboxie (nameTranslate -> translateAtts.py), później kolejne przetłumaczenie tym razem do odpowiedniego indexu w comboboxie, i ustawienie go na daną wartość
                 # jeśli brak atrybutu - automatyczne ustawienie comboboxa na pustą wartość
 
                 if len(openedCard.hatName) > 0:
